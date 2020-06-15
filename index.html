@@ -33,7 +33,7 @@
 <script>
 
      // set the center of the map
-    var map = L.map('map', {scrollWheelZoom:true}).setView([51.502518, -0.763875], 18);
+    var map = L.map('map', {scrollWheelZoom:true}).setView([51.498163, -0.773273], 15);
 
     
    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -58,7 +58,7 @@
         }
     
     // create marker object, pass custom icon as option, pass content and options to popup, add to map
-    L.marker([51.502518, -0.763875], {icon: basketball}).bindPopup(customPopup,customOptions).addTo(map);
+    L.marker([51.498163, -0.773273], {icon: basketball}).bindPopup(customPopup,customOptions).addTo(map);
 
 </script>
 

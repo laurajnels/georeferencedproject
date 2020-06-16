@@ -11,8 +11,6 @@
 <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
  
 <style>
-
-<style>
   body { margin:0; padding:0; }
   #map { position: absolute; top:0; bottom:0; right:0; left:0; }
   #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
@@ -21,8 +19,7 @@
 .custom .leaflet-popup-content-wrapper {
     background: #00aeef;
     color: #ffffff;
-}
-</style>
+}</style>
 
 </head>
 
@@ -32,18 +29,25 @@
 
 <script>
 
-     // set the center of the map
+     // set the center of the map, allow scroll wheel zoom, set zoom to 15
     var map = L.map('map', {scrollWheelZoom:true}).setView([51.498163, -0.773273], 15);
+    // don't forget to define var for each item! :)
 
-    
-   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    // Add ESRI tiles layer
+  var ESRI = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map); // add to map becomes a very repetitive line of code
+
+    // Add historical layer
+    var Historical = L.tileLayer('./historicaltiles/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">Historical</a> contributors'
     }).addTo(map);
 
-    // create custom icon
-    var basketball = L.icon({
-        iconUrl: 'https://i.ibb.co/Yhxs4Lr/uncbasketball.png',
-        iconSize: [40, 40], // size of the icon
+
+     // create custom icon
+    var ATA = L.icon({
+        iconUrl: 'https://www.themilitaryplace.com/wp-content/uploads/2016/10/atasm-1000x1000.png?x68946',
+        iconSize: [60, 60], // size of the icon
         popupAnchor: [0,-15]
         });
 
@@ -58,7 +62,30 @@
         }
     
     // create marker object, pass custom icon as option, pass content and options to popup, add to map
-    L.marker([51.498163, -0.773273], {icon: basketball}).bindPopup(customPopup,customOptions).addTo(map);
+   var marker = L.marker([51.498163, -0.773273], {icon: ATA}).bindPopup(customPopup,customOptions).addTo(map);
+
+
+// adding two points to use for the runway
+var toUnion = [[51.495360, -0.775454],[51.503929, -0.768647]];
+    
+    // adding the line between the points, making it blue
+var polylineLayer = L.polyline(toUnion,{color:'blue',opacity:1}).addTo(map);
+
+// adding a circle around the center of the airfield, stroke color yellow, fill blue with low opacity
+var circle = L.circle([51.498163, -0.773273], 800,{color:'yellow',opacity:1,fillColor: 'blue',fillOpacity:.2}).addTo(map);
+
+// Define base layers, overlays & add controls
+var baseLayers = {
+    "Base Map": ESRI,
+    "Historical Layer": Historical
+    
+};
+var overlays = {
+    "Marker": marker,
+    "Runways": polylineLayer,
+    "Area" : circle
+};
+L.control.layers(baseLayers, overlays).addTo(map);
 
 </script>
 

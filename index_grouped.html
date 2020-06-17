@@ -4,8 +4,7 @@
  
 <head>
  
-<title>Walt Whitham Airfield</title>
-
+<title>Walt Whitham Airfield in Maidenhead, England</title>
  
 <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.css" />
  
@@ -53,8 +52,8 @@
         });
 
     var spitfire = L.icon({
-        iconUrl: 'https://i.ibb.co/yRzhzxB/plane.png', // icon url
-        iconSize: [70, 70], // size of the icon
+        iconUrl: 'https://static.thenounproject.com/png/1112532-200.png', // icon url
+        iconSize: [80, 80], // size of the icon
         popupAnchor: [0,-15] // where the popup should go
         });
 
@@ -66,7 +65,7 @@
 
     var star = L.icon({
         iconUrl: 'https://img.icons8.com/plasticine/2x/star.png', // icon url
-        iconSize: [50, 50], // size of the icon
+        iconSize: [40, 40], // size of the icon
         popupAnchor: [0,-15] // where the popup should go
         });
 
@@ -151,19 +150,19 @@ var circle = L.circle([51.498163, -0.773273], 800,{color:'yellow',opacity:1,fill
 // Define base layers, overlays & add controls
 var baseLayers = {
     "Base Map": ESRI
-    
+
 };
+    
+var daMarkers = L.layerGroup([marker, marker2, marker3]);
+
+};
+
 var overlays = {
+
     "White Waltham Airfield and Surrounding Area" : circle,
     "Aerial Image, WWII": Historical,
     "Runway 21": polylineLayer,
-    "ATA Headquarters": marker1,
-    "Runway Information": marker2,
-    "Royal History": marker3,
-    "Aircraft Tiedowns": marker4,
-    "Maidenhead Office Park": marker5,
-    "Waltham Road": marker6
-
+    "Markers": daMarkers
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);

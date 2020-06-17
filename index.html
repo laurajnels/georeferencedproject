@@ -1,31 +1,28 @@
 <!DOCTYPE html>
- 
+
+
 <html>
  
 <head>
- 
-<title>Walt Whitham Airfield</title>
 
+<title> White Waltham Airfield </title>
  
 <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.css" />
  
 <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7.3/leaflet.js"></script>
  
+
 <style>
-  body { margin:0; padding:0; }
-  #map { position: absolute; top:0; bottom:0; right:0; left:0; }
-  #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
-
-.custom .leaflet-popup-tip,
-.custom .leaflet-popup-content-wrapper {
-    background: #d7b740; 
-    color: #000000;
-}</style>
-
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+    #map-title { position: relative; margin-top: 10px; margin-left: 50px; float: left; background: white; border: 2px solid rgba(0,0,0,0.2); padding: 6px 8px; font-family: Helvetica; font-weight: bold; font-size: 24px; z-index: 800; }
+    </style>
 </head>
 
 <body>
 
+
+    <div id="map-title">White Waltham Airfield | Maidenhead, England, UK</div>
     <div id="map"></div>
 
 <script>
@@ -148,10 +145,11 @@ var polylineLayer = L.polyline(toUnion,{color:'lightblue',opacity:1}).addTo(map)
 // adding a circle around the center of the airfield, stroke color yellow, fill blue with low opacity
 var circle = L.circle([51.498163, -0.773273], 800,{color:'yellow',opacity:1,fillColor: 'yellow',fillOpacity:.2}).addTo(map);
 
-// Define base layers, overlays & add controls
+// Define base layer
 var baseLayers = {
     "Base Map": ESRI
     
+// Define the historical overlay and markers
 };
 var overlays = {
     "White Waltham Airfield and Surrounding Area" : circle,
@@ -166,6 +164,7 @@ var overlays = {
 
 };
 
+//add it all to the map!
 L.control.layers(baseLayers, overlays).addTo(map);
 
 </script>
@@ -173,3 +172,4 @@ L.control.layers(baseLayers, overlays).addTo(map);
 </body>
 
 </html>
+
